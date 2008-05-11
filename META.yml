@@ -1,0 +1,17 @@
+--- #YAML:1.0
+name:                POE-Filter-Transparent-SMTP
+version:             0.1
+abstract:            Make SMTP transparency a breeze :)
+license:             ~
+author:              
+    - George Nistorica <ultradm@cpan.org>
+generated_by:        ExtUtils::MakeMaker version 6.44
+distribution_type:   module
+requires:     
+    Carp:                          0
+    Data::Dumper:                  0
+    POE::Filter::Line:             0
+    Test::More:                    0
+meta-spec:
+    url:     http://module-build.sourceforge.net/META-spec-v1.3.html
+    version: 1.3

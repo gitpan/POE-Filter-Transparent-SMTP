@@ -1,0 +1,9 @@
+Revision history for POE-Filter-Transparent-SMTP
+
+2008-05-03  George Nistorica
+
+	* SMTP.pm: *** empty log message ***
+
+	* SMTP.pm: New file.
+
+Initial commit
