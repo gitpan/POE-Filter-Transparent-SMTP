@@ -1,12 +1,12 @@
 #!/usr/bin/env perl
 
-# Copyright (c) 2008 George Nistorica
+# Copyright (c) 2008-2009 George Nistorica
 # All rights reserved.
 # This program is free software; you can redistribute it and/or
 # modify it under the same terms as Perl itself.  See the LICENSE
 # file that comes with this distribution for more details.
 
-#	($rcs) = (' $Id: 030-transparency.t,v 1.3 2008/05/03 17:33:00 george Exp $ ' =~ /(\d+(\.\d+)+)/);
+#	($rcs) = (' $Id: 030-transparency.t,v 1.4 2009/01/28 12:38:10 george Exp $ ' =~ /(\d+(\.\d+)+)/);
 
 use strict;
 use warnings;

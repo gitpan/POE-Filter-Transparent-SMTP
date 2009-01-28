@@ -1,10 +1,10 @@
-# Copyright (c) 2008 George Nistorica
+# Copyright (c) 2008-2009 George Nistorica
 # All rights reserved.
 # This program is free software; you can redistribute it and/or
 # modify it under the same terms as Perl itself.  See the LICENSE
 # file that comes with this distribution for more details.
 
-# 	($rcs) = (' $Id: SMTP.pm,v 1.8 2008/05/03 17:37:00 george Exp $ ' =~ /(\d+(\.\d+)+)/);
+# 	($rcs) = (' $Id: SMTP.pm,v 1.11 2009/01/28 12:45:15 george Exp $ ' =~ /(\d+(\.\d+)+)/);
 
 package POE::Filter::Transparent::SMTP;
 use strict;
@@ -14,7 +14,7 @@ use POE::Filter::Line;
 use Data::Dumper;
 use Carp;
 
-our $VERSION = q{0.1};
+our $VERSION = q{0.2};
 my $EOL = qq{\015\012};
 
 sub new {
@@ -49,6 +49,22 @@ sub new {
     }
     else {
         $self->{'Warn'} = 0;
+    }
+
+    # check for EscapeSingleInputDot
+    # defaults to no
+    # useful for escaping Single Dot on a line in message bodies (not
+    # entire SMTP transaction logs, that include the message body as
+    # well)
+
+    if (    exists $options{'EscapeSingleInputDot'}
+        and defined $options{'EscapeSingleInputDot'}
+        and $options{'EscapeSingleInputDot'} )
+    {
+        $self->{'EscapeSingleInputDot'} = 1;
+    }
+    else {
+        $self->{'EscapeSingleInputDot'} = 0;
     }
 
     # create the POE::Filter::Line filter to store inside our little so
@@ -139,6 +155,15 @@ sub put {
         if ( $lines->[$i] =~ /^\..+$literal$/s ) {
             $lines->[$i] = q{.} . $lines->[$i];
         }
+
+        # do we escape single dot? (for filtering message bodies, not
+        # entire SMTP transaction
+        if ( $self->{'EscapeSingleInputDot'}
+            and ( $lines->[$i] =~ /^\.$/so or $lines->[$i] =~ /^\.$literal$/so )
+          )
+        {
+            $lines->[$i] = q{.} . $lines->[$i];
+        }
     }
 
     return $lines;
@@ -162,7 +187,7 @@ POE::Filter::Transparent::SMTP - Make SMTP transparency a breeze :)
 
 =head1 VERSION
 
-VERSION: 0.1
+VERSION: 0.2
 
 =head1 SYNOPSIS
 
@@ -218,7 +243,7 @@ have a look at L<POE::Filter> documentation.
 
 Creates a new filter.
 
-It accepts two optional arguments:
+It accepts four optional arguments:
 
 =over 4
 
@@ -242,6 +267,16 @@ It defaults to B<CRLF> if not specified otherwise.
 In case L</get_one> receives lines starting with a leading dot and
 L</Warn> is enabled it issues a warning about this. By default the
 warning is disabled.
+
+=item EscapeSingleInputDot
+
+In case you want to escape the single dot when reading data.
+
+The parameter is useful for escaping single dots on a line when
+reading message bodies. Don't use this for filtering entire SMTP
+transaction logs as it will ruin your command '.'
+
+B<Defaults> to false
 
 =back
 
@@ -373,7 +408,7 @@ George Nistorica, ultradm __at cpan __dot org
 
 =head1 COPYRIGHT & LICENSE
 
-Copyright 2008 George Nistorica, all rights reserved.  This program is
+Copyright 2008-2009 George Nistorica, all rights reserved.  This program is
 free software; you can redistribute it and/or modify it under the same
 terms as Perl itself.
 

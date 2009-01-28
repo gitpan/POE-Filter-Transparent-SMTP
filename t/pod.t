@@ -1,12 +1,12 @@
-#!perl -T
+#!perl
 
-# Copyright (c) 2008 George Nistorica
+# Copyright (c) 2008-2009 George Nistorica
 # All rights reserved.
 # This program is free software; you can redistribute it and/or
 # modify it under the same terms as Perl itself.  See the LICENSE
 # file that comes with this distribution for more details.
 
-# 	($rcs) = (' $Id: pod.t,v 1.2 2008/05/03 12:45:56 george Exp $ ' =~ /(\d+(\.\d+)+)/);	
+# 	($rcs) = (' $Id: pod.t,v 1.3 2009/01/28 12:37:41 george Exp $ ' =~ /(\d+(\.\d+)+)/);	
 
 use strict;
 use warnings;

@@ -1,12 +1,12 @@
 #!/usr/bin/env perl
 
-# Copyright (c) 2008 George Nistorica
+# Copyright (c) 2008-2009 George Nistorica
 # All rights reserved.
 # This program is free software; you can redistribute it and/or
 # modify it under the same terms as Perl itself.  See the LICENSE
 # file that comes with this distribution for more details.
 
-# 	($rcs) = (' $Id: 020-filter_line_compat.t,v 1.5 2008/05/03 17:33:49 george Exp $ ' =~ /(\d+(\.\d+)+)/);
+# 	($rcs) = (' $Id: 020-filter_line_compat.t,v 1.6 2009/01/28 12:38:29 george Exp $ ' =~ /(\d+(\.\d+)+)/);
 
 use strict;
 use warnings;
